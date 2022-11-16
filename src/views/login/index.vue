@@ -118,6 +118,9 @@ export default {
       immediate: true
     }
   },
+  created() {
+    this.$store.dispatch('user/login')
+  },
   methods: {
     showPwd() {
       if (this.passwordType === 'password') {
