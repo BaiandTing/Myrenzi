@@ -23,7 +23,7 @@
           </router-link>
           <a
             target="_blank"
-            href="https://github.com/PanJiaChen/vue-admin-template/"
+            href="git@github.com:BaiandTing/Myrenzi.git"
           >
             <el-dropdown-item>项目地址</el-dropdown-item>
           </a>

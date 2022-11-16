@@ -8,8 +8,11 @@ export function login(data) {
   return request.post('/sys/login', data)
 }
 
-export function getInfo(token) {
-
+/* *
+* 获取用户的基本资料
+* */
+export function getUserInfo() {
+  return request.post('/sys/profile')
 }
 
 export function logout() {
