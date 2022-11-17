@@ -1,6 +1,6 @@
 // 本地缓存
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login, getUserInfo } from '@/api/user'
+import { login, getUserInfo, getUserDetailById } from '@/api/user'
 // 状态
 // 初始化的时候从缓存中读取状态 并赋值到初始化的状态上
 // Vuex的持久化 如何实现 ？ Vuex和前端缓存相结合
@@ -37,6 +37,7 @@ const mutations = {
 }
 // 异步操作
 const actions = {
+
   //  登录 的 异步
   // 定义login action  也需要参数 调用action时 传递过来的参数
   async login(ctx, data) {
@@ -48,11 +49,22 @@ const actions = {
     // actions 修改state 必须通过mutations
     ctx.commit('setToken', res)
   },
+
   // 获取用户资料的action
   async getUserInfo(ctx) {
     const res = await getUserInfo()
-    ctx.commit('setUserInfo', res)
-    return res // 这里为什么要返回 为后面埋下伏笔
+    const baseInfo = await getUserDetailById(res.userId)
+    const baseRes = { ...res, ...baseInfo }
+    ctx.commit('setUserInfo', baseRes)
+    return baseRes // 这里为什么要返回 为后面埋下伏笔
+  },
+
+  // 登出 的action
+  logout(ctx) {
+    // 删除token
+    ctx.commit('removeToken')// 不仅仅删除了vuex中的 还删除了缓存中的
+    // // 删除用户资料
+    ctx.commit('removeUserInfo')
   }
 }
 
