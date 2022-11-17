@@ -2,7 +2,6 @@
 import store from '@/store'
 import axios from 'axios'
 import { Message } from 'element-ui'
-import { configure } from 'nprogress'
 // 创建一个axios实例
 const service = axios.create({
   // 如果执行 npm run dev  值为 /api 正确  /api 这个代理只是给开发环境配置的代理
