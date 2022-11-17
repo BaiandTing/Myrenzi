@@ -27,7 +27,7 @@
     </div>
 
     <!-- 放置新增弹层组件 -->
-    <add-dept :show-dialog="showDialog" />
+    <add-dept :show-dialog="showDialog" :tree-node="node" />
   </div>
 </template>
 
@@ -45,7 +45,8 @@ export default {
         label: 'name' // 表示 从这个属性显示内容
       },
       company: { }, // 就是头部的数据结构
-      showDialog: false // 显示窗体
+      showDialog: false, // 显示窗体
+      node: null
     }
   },
   created() {
@@ -55,7 +56,7 @@ export default {
     // 得到 设置 信息
     async getDepartments() {
       const result = await getDepartments()
-      this.company = { name: result.companyName, manager: '负责人' }
+      this.company = { name: result.companyName, manager: '负责人', id: '' }
       this.departs = tranListToTreeData(result.depts, '') // 需要将其转化成树形结构
       // console.log(result)
       // this.departs = result.depts
